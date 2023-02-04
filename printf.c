@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 /**
  * _printf - emulates the standard printf function
@@ -15,17 +16,17 @@ char *convert(unsigned int num, int bass);
 int _printf(const char *format, ...)
 {
 
-	char *s;
+	char *s = NULL;
 	char *run;
 	int x;
 
 	va_list lizts;
 
 	va_start(lizts, format);
-	for (run = format; run != '\0'; run++)
+	for (run = (char *)format; *run != '\0'; run++)
 	{
 
-		while (*run != % && *run != '\0')
+		while (*run != '%' && *run != '\0')
 		{
 			write(1, &run, 1);
 			run++;
@@ -41,8 +42,8 @@ int _printf(const char *format, ...)
 				  if (x < 0)
 				  {
 
-					  x = -x;
-					  write(1, '-', 1);
+					x = -x;
+					putchar('-');
 				  }
 				  convert(x, 10);
 				  write(1, &x, 1);
@@ -51,8 +52,8 @@ int _printf(const char *format, ...)
 				  convert(x, 10);
 				  write(1, &x, 1);
 				  break;
-			case 's': x = va_arg(lizts, char *);
-				  write(1, &x, 1);
+			case 's': s = va_arg(lizts, char *);
+				  write(1, s, 1);
 				  break;
 			case 'x': x = va_arg(lizts, unsigned int);
 				  convert(x, 16);
