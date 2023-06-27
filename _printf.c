@@ -22,6 +22,7 @@ int _printf(const char * const format, ...)
 	char *str;
 	int b;
 	int i;
+	int e;
 	float d;
 	char c;
 
@@ -31,7 +32,8 @@ int _printf(const char * const format, ...)
 	{
 		if (format[var_1] == '%')
 		{
-			switch (format[var_1 + 1])
+			var_1++;
+			switch (format[var_1])
 			{
 				case 'i':
 					i = va_arg(ap, int);
@@ -44,18 +46,17 @@ int _printf(const char * const format, ...)
 				case 's':
 					str = va_arg(ap, char *);
 					count += print_str(str);
-					c = va_arg(ap, int);
 					break;
 				case 'f':
 					d = va_arg(ap, double);
 					count += print_num(d);
 					break;
 				case 'd':
-					i = va_arg(ap, int);
-					count += print_num(i);
+					e = va_arg(ap, int);
+					count += print_num(e);
 					break;
 				case '%':
-					count += write(1, "%", 2);
+					count += write(1, "%", 1);
 					break;
 				case 'b':
 					b = va_arg(ap, int);
@@ -74,7 +75,9 @@ int _printf(const char * const format, ...)
 					count += print_hex('X', b);
 					break;
 				default:
-					write(1, &c, 1);
+					write(1, "%", 1);
+					write(1, &format[var_1], 1);
+					count += 2;
 			}
 		}
 
@@ -110,7 +113,8 @@ int _printf(const char * const format, ...)
 			}
 
 		}
-		count += write(1, &format[var_1], 1);
+		else
+			count += write(1, &format[var_1], 1);
 		var_1++;
 	}
 	return (count);

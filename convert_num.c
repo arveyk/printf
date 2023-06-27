@@ -33,10 +33,10 @@ size_t convert_num(int base, int n)
 	}
 	while (r++ < 32)
 	{
-		if (con_arr[r] + '0' > 0)
+		if (con_arr[r] != '0')
 			flip = '1';
 		if (flip == '1')
-		give +=	write(1, &(con_arr[r]), 1);
+			give +=	write(1, &(con_arr[r]), 1);
 	}
 	return (give);
 }
