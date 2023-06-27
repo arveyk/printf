@@ -1,8 +1,11 @@
-#include "main.h"
+#include "../main.h"
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <stddef.h>
 #include <stdarg.h>
+
+size_t print_str(const char *const str);
 
 /**
  * _printf - emulates what the std printf function does
@@ -10,53 +13,70 @@
  *
  * Return: Number of characters printed
  */
-int _printf(const char *format, ...)
+int _printf(const char * const format, ...)
 {
 
 	va_list ap;
 	int var_1;
 	int count;
-	int i;
-	char *str = NULL;
+	char *str;
+	float d;
 	char c;
 
 	count = 0;
 	var_1 = 0;
-	while(format[var_1] != '\0')
+	while (format[var_1] != '\0')
 	{
 		if (format[var_1] == '%')
 		{
-			switch(format[var_1 + 1])
+			switch (format[var_1 + 1])
 			{
 				case 'c':
 					c = va_arg(ap, int);
-					count += write(1, &c, 1);
+					write(1, &c, 1);
 					break;
 				case 's':
 					str = va_arg(ap, char *);
-					print_string(str);
+					count += print_str(str);
+					c = va_arg(ap, int);
 					break;
-				case '%':
-					count += write(1, "%", 2);
+				case 'f':
+					d = va_arg(ap, double);
+					print_num(d);
 					break;
 				case 'd':
 					i = va_arg(ap, int);
-					print_num(i);
+					count += print_num(i);
 					break;
-				case 'i':
-					i = va_arg(ap, int);
-					print_num(i);
+				case '%':
+					count += write(1, '%', 2);
 					break;
+				case 'b':
+					b = va_arg(ap, int);
+					convert_num(2, b);
+					break;
+				case 'o':
+					b = va_arg(ap, int);
+					convert_num(8, b);
+					break;
+				case 'x':
+					b = va_arg(ap, int);
+					print_hex(x, b);
+					break;
+				case 'X':
+					b = va_arg(ap, int);
+					print_hex(x, b);
+					break;
+				case '':
 				default:
-					write(1, "unknown characters", 19);
-					break;
-					 
+					write(1, "%", 2);
+					write(1, &c, 1);
 			}
 		}
 
 		if (format[var_1] == '\\')
 		{
-			switch(format[var_1 + 1])
+			switch (format[var_1 + 1])
 			{
 				case 't':
 					write(1, "\t", 2);
@@ -83,10 +103,31 @@ int _printf(const char *format, ...)
 					write(1, "Error", 6);
 					break;
 			}
-		
+
 		}
 		count += write(1, &format[var_1], 1);
 		var_1++;
 	}
 	return (count);
+}
+
+/**
+ * print_str - prints a string
+ * @str: string to be printed
+ *
+ * Return: Number of characters printed
+ */
+size_t print_str(const char *const str)
+{
+
+	size_t i = 0;
+	size_t z = 0;
+	char *ptr;
+
+	if (str == NULL)
+		return (0);
+	ptr = (char *)str;
+	while (ptr[i] != '\0')
+		z += write(1, &ptr[i], 1);
+	return (z);
 }

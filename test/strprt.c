@@ -12,51 +12,38 @@
  */
 int _printf(const char *format, ...)
 {
-
 	va_list ap;
 	int var_1;
 	int count;
-	int i;
-	char *str = NULL;
+	char *str;
 	char c;
 
 	count = 0;
 	var_1 = 0;
-	while(format[var_1] != '\0')
+	while (format[var_1] != '\0')
 	{
 		if (format[var_1] == '%')
 		{
-			switch(format[var_1 + 1])
+			switch (format[var_1 + 1])
 			{
-				case 'c':
-					c = va_arg(ap, int);
-					count += write(1, &c, 1);
-					break;
 				case 's':
 					str = va_arg(ap, char *);
 					print_str(str);
 					break;
 				case '%':
-					count += write(1, "%", 2);
-					break;
-				case 'd':
-					i = va_arg(ap, int);
-					print_num(i);
-					break;
-				case 'i':
-					i = va_arg(ap, int);
-					print_num(i);
+					count += write(1, " ", 2);
 					break;
 				default:
-					write(1, "unknown characters", 19);
+					c = va_arg(ap, int);
+					write(1, "%", 2);
+					write(1, &c, 1);
 					break;
-					 
 			}
 		}
 
 		if (format[var_1] == '\\')
 		{
-			switch(format[var_1 + 1])
+			switch (format[var_1 + 1])
 			{
 				case 't':
 					write(1, "\t", 2);
@@ -80,10 +67,12 @@ int _printf(const char *format, ...)
 					write(1, "\v", 2);
 					break;
 				default:
-					write(1, "Error", 6);
+					c = va_arg(ap, int);
+					write(1, "\\", 1);
+					write(1, &c, 1);
 					break;
 			}
-		
+
 		}
 		count += write(1, &format[var_1], 1);
 		var_1++;

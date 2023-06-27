@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stddef.h>
+#include "../main.h"
 
 /**
  * print_string - prints a string
@@ -8,20 +9,18 @@
  *
  * Return: Number of characters printed
  */
-size_t print_str(char *str)
+size_t print_str(const char *const str)
 {
 
 	size_t i = 0;
 	size_t z = 0;
-/*	char c = '\n';	*/
+	char *ptr = (char *)str;
 
-
+	if (str == NULL)
+		return (0);
 	while (str[i] != '\0')
 	{
 		z += write(1, &str[i], 1);
-		i++;
-	}
-	write(1, &z, 1);
-
+	
 	return (z);
 }

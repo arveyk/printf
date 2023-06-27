@@ -9,6 +9,7 @@
  */
 int main(void)
 {
+	char srt[] = "I am a string !";
  /*
     int len;
     int len2;
@@ -32,7 +33,7 @@ int main(void)
     _printf("Character:[%c]\n", 'H');
     printf("Character:[%c]\n", 'H');
  */
-    _printf("String:[%s]\n", "I am a string !");
+    _printf("String:[%s]\n", srt);
     printf("String:[%s]\n", "I am a string !");
     /*
   _printf("Address:[%p]\n", addr);
