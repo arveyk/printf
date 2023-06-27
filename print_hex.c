@@ -90,4 +90,5 @@ size_t print_hex(char c, int n)
 			give += write(1, &(con_arr[r]), 1);
 
 	}
+	return (give);
 }
