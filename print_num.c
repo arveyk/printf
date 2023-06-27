@@ -6,17 +6,19 @@
  * print_num - converts a number to different base
  * @n: the number to be printed
  *
- * Return:
+ * Return: returns number of characters printed
  */
-void print_num(int n)
+size_t print_num(int n)
 {
 
 	int r;
+	unsigned int give;
 	int rem, q;
 	char flip = '0';
 	int con_arr[32];
 
 	r = 0;
+	give = 0;
 	while (r < 32)
 	{
 		con_arr[r] = 0;
@@ -34,6 +36,7 @@ void print_num(int n)
 		if (con_arr[r] - '0' > 0)
 			flip = '1';
 		if (flip == '1')
-			write(1, &(con_arr[r]), 1);
+			give += write(1, &(con_arr[r]), 1);
 	}
+	return (give);
 }

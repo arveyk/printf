@@ -6,13 +6,13 @@
 
 int _printf(const char *format, ...);
 
-void print_hex(char c, int n);
-void print_num(int n);
-void print_bin(int n);
-void print_oct(int n);
+size_t print_hex(char c, int n);
+size_t print_num(int n);
+size_t print_bin(int n);
+size_t print_oct(int n);
 
 size_t print_str(const char *const str);
-int print_string(const char *const str);
-void convert_num(int base, int num);
+size_t print_string(const char *const str);
+size_t convert_num(int base, int num);
 
 #endif

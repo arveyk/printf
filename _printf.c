@@ -1,4 +1,4 @@
-#include "../main.h"
+#include "main.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -20,6 +20,8 @@ int _printf(const char * const format, ...)
 	int var_1;
 	int count;
 	char *str;
+	int b;
+	int i;
 	float d;
 	char c;
 
@@ -49,7 +51,7 @@ int _printf(const char * const format, ...)
 					count += print_num(i);
 					break;
 				case '%':
-					count += write(1, '%', 2);
+					count += write(1, "%", 2);
 					break;
 				case 'b':
 					b = va_arg(ap, int);
@@ -61,15 +63,14 @@ int _printf(const char * const format, ...)
 					break;
 				case 'x':
 					b = va_arg(ap, int);
-					print_hex(x, b);
+					print_hex('x', b);
 					break;
 				case 'X':
 					b = va_arg(ap, int);
-					print_hex(x, b);
+					print_hex('X', b);
 					break;
-				case '':
 				default:
-					write(1, "%", 2);
+					write(1, "\%", 2);
 					write(1, &c, 1);
 			}
 		}
