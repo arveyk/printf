@@ -33,9 +33,13 @@ int _printf(const char * const format, ...)
 		{
 			switch (format[var_1 + 1])
 			{
+				case 'i':
+					i = va_arg(ap, int);
+					count += print_num(i);
+					break;
 				case 'c':
 					c = va_arg(ap, int);
-					write(1, &c, 1);
+					count += write(1, &c, 1);
 					break;
 				case 's':
 					str = va_arg(ap, char *);
@@ -44,7 +48,7 @@ int _printf(const char * const format, ...)
 					break;
 				case 'f':
 					d = va_arg(ap, double);
-					print_num(d);
+					count += print_num(d);
 					break;
 				case 'd':
 					i = va_arg(ap, int);
@@ -55,53 +59,53 @@ int _printf(const char * const format, ...)
 					break;
 				case 'b':
 					b = va_arg(ap, int);
-					convert_num(2, b);
+					count += convert_num(2, b);
 					break;
 				case 'o':
 					b = va_arg(ap, int);
-					convert_num(8, b);
+					count += convert_num(8, b);
 					break;
 				case 'x':
 					b = va_arg(ap, int);
-					print_hex('x', b);
+					count += print_hex('x', b);
 					break;
 				case 'X':
 					b = va_arg(ap, int);
-					print_hex('X', b);
+					count += print_hex('X', b);
 					break;
 				default:
-					write(1, "\%", 2);
 					write(1, &c, 1);
 			}
 		}
 
-		if (format[var_1] == '\\')
+		else if (format[var_1] == '\\')
 		{
 			switch (format[var_1 + 1])
 			{
 				case 't':
-					write(1, "\t", 2);
+					count += write(1, "\t", 2);
 					break;
 				case 'n':
-					write(1, "\n", 2);
+					count += write(1, "\n", 2);
 					break;
 				case 'r':
-					write(1, "\r", 2);
+					count += write(1, "\r", 2);
 					break;
 				case 'a':
-					write(1, "\a", 2);
+					count += write(1, "\a", 2);
 					break;
 				case 'b':
-					write(1, "\b", 2);
+					count += write(1, "\b", 2);
 					break;
 				case 'f':
-					write(1, "\f", 2);
+					count += write(1, "\f", 2);
 					break;
 				case 'v':
-					write(1, "\v", 2);
+					count += write(1, "\v", 2);
 					break;
 				default:
-					write(1, "Error", 6);
+					c = va_arg(ap, int);
+					count += write(1, &c, 1);
 					break;
 			}
 
