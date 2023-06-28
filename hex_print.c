@@ -8,10 +8,11 @@
  *
  * Return: Nothing yet
  */
-void print_hex(char c, int n)
+size_t print_hex(char c, int n)
 {
 
 	int r;
+	size_t give = 0;
 	int rem, q;
 	char flip = '0';
 	char con_arr[32];
@@ -87,6 +88,7 @@ void print_hex(char c, int n)
 		if (con_arr[r] != '0')
 			flip = '1';
 		if (flip == '1')
-			write(1, &(con_arr[r]), 1);
+			give += write(1, &(con_arr[r]), 1);
 	}
+	return (give);
 }
