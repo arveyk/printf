@@ -13,7 +13,7 @@ size_t print_str(const char *const str);
  *
  * Return: Number of characters printed
  */
-int _printf(const char * const format, ...)
+int _printf(const char *format, ...)
 {
 
 	va_list ap;
@@ -29,6 +29,7 @@ int _printf(const char * const format, ...)
 
 	count = 0;
 	var_1 = 0;
+	va_start(ap, format);
 	while (format[var_1] != '\0')
 	{
 		if (format[var_1] == '%')
@@ -124,6 +125,7 @@ int _printf(const char * const format, ...)
 			count += write(1, &format[var_1], 1);
 		var_1++;
 	}
+	va_end(ap);
 	return (count);
 }
 
@@ -144,6 +146,9 @@ size_t print_str(const char *const str)
 		return (0);
 	ptr = (char *)str;
 	while (ptr[i] != '\0')
+	{
 		z += write(1, &ptr[i], 1);
+		i++;
+	}
 	return (z);
 }

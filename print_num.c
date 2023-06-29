@@ -19,6 +19,11 @@ size_t print_num(int n)
 
 	r = 0;
 	give = 0;
+	if (n < 0)
+	{
+		write(1, "-", 2);
+		n = -n;
+	}
 	while (r < 32)
 	{
 		con_arr[r] = 0;

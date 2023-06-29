@@ -22,13 +22,14 @@ size_t convert_num(int base, int n)
 	if (n < 0)
 	{
 		write(1, "-", 2);
-		n = -n;
+		n *= -1;
 	}
 	while (r < 32)
 	{
 		con_arr[r] = 0;
 		r++;
 	}
+	r = 31;
 	while (--r > 0)
 	{
 		rem = n % base;
@@ -36,6 +37,7 @@ size_t convert_num(int base, int n)
 		con_arr[r] = rem + '0';
 		n = q;
 	}
+	r = 0;
 	while (r++ < 32)
 	{
 		if (con_arr[r] != '0')
