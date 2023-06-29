@@ -47,5 +47,5 @@ size_t print_hex(char c, int n)
 		if (flip == '1')
 			give += write(1, &(con_arr[r]), 1);
 	}
-	return (give);
+	return (give - 1);
 }
