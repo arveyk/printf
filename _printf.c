@@ -19,12 +19,13 @@ int _printf(const char * const format, ...)
 	va_list ap;
 	int var_1;
 	int count;
-	char *str;
+	char *str = NULL;
+	char *addr = NULL;
+	char c;
 	int b;
 	int i;
 	int e;
 	float d;
-	char c;
 
 	count = 0;
 	var_1 = 0;
@@ -73,6 +74,10 @@ int _printf(const char * const format, ...)
 				case 'X':
 					b = va_arg(ap, int);
 					count += print_hex('X', b);
+					break;
+				case 'p':
+					addr = va_arg(ap, char *);
+					print_addr(addr);
 					break;
 				default:
 					write(1, "%", 1);

@@ -15,4 +15,6 @@ size_t print_str(const char *const str);
 size_t print_string(const char *const str);
 size_t convert_num(int base, int num);
 
+size_t print_addr(char *str);
+
 #endif

@@ -20,7 +20,7 @@ size_t print_str(const char *const str)
 		return (0);
 	while (str[i] != '\0')
 	{
-		z += write(1, &str[i], 1);
-	
+		z += write(1, &ptr[i], 1);
+	}	
 	return (z);
 }
