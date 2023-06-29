@@ -19,6 +19,11 @@ size_t convert_num(int base, int n)
 	int give = 0;
 
 	r = 0;
+	if (n < 0)
+	{
+		write(1, "-", 2);
+		n = -n;
+	}
 	while (r < 32)
 	{
 		con_arr[r] = 0;
