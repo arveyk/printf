@@ -26,6 +26,8 @@ int _printf(const char *format, ...)
 	int e;
 	float d;
 
+	if (format == NULL)
+		return (1);
 	count = 0;
 	var_1 = 0;
 	va_start(ap, format);
@@ -142,7 +144,7 @@ size_t print_str(const char *const str)
 	char *ptr;
 
 	if (str == NULL)
-		return (0);
+		return (1);
 	ptr = (char *)str;
 	while (ptr[i] != '\0')
 	{

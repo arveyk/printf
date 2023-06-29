@@ -22,6 +22,7 @@ size_t print_num(int n)
 	if (n < 0)
 	{
 		write(1, "-", 2);
+		give++;
 		n = -n;
 	}
 	while (r < 32)
@@ -38,10 +39,15 @@ size_t print_num(int n)
 	}
 	while (r++ < 32)
 	{
-		if (con_arr[r] - '0' > 0)
-			flip = '1';
-		if (flip == '1')
-			give += write(1, &(con_arr[r]), 1);
+		if (n == 0)
+			give = 2;
+		else
+		{
+			if (con_arr[r] - '0' > 0)
+				flip = '1';
+			if (flip == '1')
+				give += write(1, &(con_arr[r]), 1);
+		}
 	}
-	return (give);
+	return (give - 1);
 }
