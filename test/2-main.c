@@ -7,6 +7,6 @@
  */
 int main(void)
 {
-	convert_num(8, 98);
+	_printf("%b\n", 98);
 	return (0);
 }

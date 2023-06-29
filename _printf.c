@@ -5,8 +5,7 @@
 #include <stddef.h>
 #include <stdarg.h>
 
-size_t print_str(const char *const str);
-
+size_t print_str(const char *str);
 /**
  * _printf - emulates what the std printf function does
  * @format: first string to be used
